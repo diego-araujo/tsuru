@@ -158,6 +158,12 @@ func (s *Storage) Quota() *storage.Collection {
 	return c
 }
 
+func (s *Storage) SAMLRequests() *storage.Collection {
+	coll := s.Collection("saml_requests")
+	coll.EnsureIndex(mgo.Index{Key: []string{"request"}})
+	return coll
+}
+
 var logCappedInfo = mgo.CollectionInfo{
 	Capped:       true,
 	MaxBytes:     200 * 5000,
